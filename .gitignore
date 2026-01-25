@@ -1,0 +1,11 @@
+# Ignore dataset folder
+dataset/
+
+# Ignore large data & temp files
+*.zip
+*.csv
+*.h5
+*.keras
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
