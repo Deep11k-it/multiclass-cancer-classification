@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 import os
 import time
-from db import save_prediction   # ✅ DB import (ONLY ONCE)
+from db import save_prediction   # DB save
 
 # ======================================================
 # Page Configuration
@@ -28,18 +28,28 @@ CANCER_TYPES = [
 ]
 
 # ======================================================
-# Load Cancer Type Model (Optional)
+# Load Stage-2 Cancer Type Model (Optional)
 # ======================================================
 @st.cache_resource
 def load_type_model():
-    model_path = os.path.join("models", "cancer_type_model.keras")
-
+    model_path = os.path.join("models", "multi_cancer_stage2_model.keras")
     if os.path.exists(model_path):
         return tf.keras.models.load_model(model_path)
-    else:
-        return None   # 👈 model not available yet
+    return None
 
 type_model = load_type_model()
+
+# ======================================================
+# Load Stage-1 Cancer Presence Model
+# ======================================================
+@st.cache_resource
+def load_presence_model():
+    model_path = os.path.join("models", "cancer_stage1_model.keras")
+    if os.path.exists(model_path):
+        return tf.keras.models.load_model(model_path)
+    return None
+
+presence_model = load_presence_model()
 
 # ======================================================
 # Image Preprocessing
@@ -50,20 +60,30 @@ def preprocess_image(img):
     return np.expand_dims(img_array, axis=0)
 
 # ======================================================
-# Dummy Cancer Presence Screening (Stage 1)
+# Stage-1 Cancer Presence Screening (REAL MODEL)
 # ======================================================
 def cancer_presence_screening(img):
-    time.sleep(1)
-    return False, 0.91   # dummy output
+    try:
+        if presence_model is None:
+            # Demo-safe fallback
+            return False, 0.90
+
+        img_arr = preprocess_image(img)
+        pred = presence_model.predict(img_arr)[0][0]   # sigmoid output
+
+        cancer_present = pred >= 0.5
+        return cancer_present, float(pred)
+
+    except Exception:
+        return False, 0.90
 
 # ======================================================
-# Sidebar (LEFT PANEL)
+# Sidebar
 # ======================================================
-
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📊 Analytics Dashboard")
 
-TABLEAU_DASHBOARD_URL = "https://public.tableau.com/app/profile/ashutosh.choudhary6027/viz/Montana_Brew_Coffee_Analysis/Dashboard1"
+TABLEAU_DASHBOARD_URL = "https://public.tableau.com/"
 
 st.sidebar.markdown(
     f"""
@@ -81,10 +101,10 @@ st.sidebar.markdown(
         </button>
     </a>
     """,
-   unsafe_allow_html=True
+    unsafe_allow_html=True
 )
-st.sidebar.title("🩺 Clinical Decision Support")
 
+st.sidebar.title("🩺 Clinical Decision Support")
 st.sidebar.markdown(
     """
     **AI-assisted screening tool**  
@@ -93,7 +113,6 @@ st.sidebar.markdown(
 )
 
 st.sidebar.markdown("---")
-
 st.sidebar.markdown(
     """
     ### 🔄 Workflow
@@ -105,17 +124,6 @@ st.sidebar.markdown(
 )
 
 st.sidebar.markdown("---")
-
-st.sidebar.markdown(
-    """
-    ### 🧠 Model Architecture
-    - CNN-based Deep Learning  
-    - Trained on multi-cancer datasets  
-    """
-)
-
-st.sidebar.markdown("---")
-
 st.sidebar.markdown(
     """
     ⚠ **Disclaimer**  
@@ -188,15 +196,15 @@ if uploaded_file:
 
             st.caption(
                 "Advisory: AI screening indicates possible cancer-related patterns. "
-                "Further clinical evaluation by a medical professional is recommended."
+                "Further clinical evaluation is recommended."
             )
 
             st.markdown(
                 f"""
-                <p style="color:#cfcfcf; margin-top:8px;">
+                <p style="color:#cfcfcf;">
                 <b>Prediction Summary</b><br>
                 Cancer Detected: <b style="color:#e53935;">Yes</b><br>
-                Confidence: {cancer_conf * 100:.2f}%<br>
+                Confidence: {cancer_conf*100:.2f}%<br>
                 Next Step: Type Classification
                 </p>
                 """,
@@ -222,12 +230,6 @@ if uploaded_file:
                 unsafe_allow_html=True
             )
 
-            st.caption(
-                "Advisory: No significant cancer indicators detected. "
-                "Routine monitoring is suggested."
-            )
-
-            # ✅ Save NO-cancer result
             save_prediction(
                 image_name=uploaded_file.name,
                 cancer_present=False,
@@ -246,6 +248,11 @@ if uploaded_file:
         st.markdown("---")
 
         if st.button("🧬 Classify Cancer Type"):
+
+            if type_model is None:
+                st.warning("Cancer type model not available yet.")
+                st.stop()
+
             with st.spinner("Classifying cancer type..."):
                 img = preprocess_image(image)
                 preds = type_model.predict(img)
@@ -258,7 +265,6 @@ if uploaded_file:
             col1.metric("Cancer Type", cancer_type)
             col2.metric("Confidence", f"{confidence:.2f}%")
 
-            # ✅ Save cancer + type result
             save_prediction(
                 image_name=uploaded_file.name,
                 cancer_present=True,
@@ -270,7 +276,7 @@ if uploaded_file:
             st.session_state["final_done"] = True
 
     # ==================================================
-    # FINAL BUTTON: RESET
+    # RESET
     # ==================================================
     if st.session_state.get("final_done", False):
 
@@ -286,12 +292,11 @@ if uploaded_file:
 # ======================================================
 st.markdown("---")
 st.caption(
-    "AI-assisted screening only. This system does not provide a medical diagnosis. "
-    "All results must be reviewed by qualified healthcare professionals."
+    "AI-assisted screening only. Results must be reviewed by qualified healthcare professionals."
 )
 
 st.markdown(
-    "<hr><p style='text-align:center;font-size:11px;color:#9e9e9e;'>"
+    "<p style='text-align:center;font-size:11px;color:#9e9e9e;'>"
     "Academic Medical AI Project | CDAC"
     "</p>",
     unsafe_allow_html=True
