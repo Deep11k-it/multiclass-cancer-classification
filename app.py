@@ -28,12 +28,16 @@ CANCER_TYPES = [
 ]
 
 # ======================================================
-# Load Cancer Type Model
+# Load Cancer Type Model (Optional)
 # ======================================================
 @st.cache_resource
 def load_type_model():
     model_path = os.path.join("models", "cancer_type_model.keras")
-    return tf.keras.models.load_model(model_path)
+
+    if os.path.exists(model_path):
+        return tf.keras.models.load_model(model_path)
+    else:
+        return None   # 👈 model not available yet
 
 type_model = load_type_model()
 
