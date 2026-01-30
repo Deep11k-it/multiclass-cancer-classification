@@ -1,37 +1,138 @@
-# 🧠 Multiclass Cancer Classification System
+# 🧬 IntelliScan: AI-Assisted Cancer Screening System
 
-## 📌 Project Summary
-This project implements a hierarchical deep learning–based cancer classification system using medical images. The system first predicts the main cancer type and then performs type-specific sub-classification to determine clinical severity such as benign, malignant, normal, or tumor.
+IntelliScan is a **two-stage deep learning–based medical image screening system** designed for **academic and research purposes**.  
+The system performs **cancer presence detection** followed by **cancer type classification**, mimicking a real-world clinical screening workflow.
 
-Convolutional Neural Networks (CNNs) are used for image classification, while scalable data pipelines and PySpark-based analysis support efficient handling of large datasets. The trained models are used to perform predictions on unseen images, enabling structured and interpretable cancer diagnosis.
+---
+
+## 🚀 Project Overview
+
+Traditional single-step cancer classification models often suffer from unnecessary complexity and false positives.  
+IntelliScan addresses this by adopting a **two-stage pipeline**:
+
+1. **Stage-1:** Detects whether cancer is present (screening)
+2. **Stage-2:** Identifies the specific cancer type only if cancer is detected
+
+This modular approach improves **interpretability**, **efficiency**, and **deployment flexibility**.
+
+---
+
+## 🧠 Methodology (Two-Stage Pipeline)
+
+### 🔹 Stage 1 – Cancer Presence Screening
+- Binary classification: `Normal` vs `Cancer`
+- Acts as a **screening gate**
+- Prevents unnecessary multi-class prediction
+
+### 🔹 Stage 2 – Cancer Type Classification
+- Activated only when cancer is detected
+- Multi-class classification of cancer type
+- Provides class probabilities and confidence score
 
 ---
 
 ## 📊 Dataset Summary
-The dataset used in this project consists of medical images categorized into multiple cancer types along with their respective sub-classes. It is organized in a structured directory format with separate training and testing folders.
 
-### 🧬 Cancer Types Included
-- **Breast Cancer**
-- **Kidney Cancer**
-- **Lung Cancer**
-- **Oral Cancer**
+### Stage-1 Dataset (Binary Classification)
+**Objective:** Detect cancer presence
 
-### 🏷️ Sub-Class Information
-Each cancer type contains type-specific sub-classes representing clinical conditions such as:
-- Benign
-- Malignant
-- Normal
-- Tumor
-- Cancerous
+**Classes:**
+- Normal (Benign)
+- Cancer (Malignant)
 
-> Sub-class definitions vary across cancer types; therefore, a hierarchical classification approach is adopted to avoid label ambiguity.
+**Task:** Binary image classification
 
-### 📦 Dataset Details
-- **Data Type:** Medical Images (JPG/PNG)
-- **Approximate Size:** ~5 GB
-- **Data Split:** Train / Test
+---
 
-### ⚙️ Processing & Storage Notes
-- Images are loaded in batches using TensorFlow data pipelines
-- PySpark is used for dataset analysis and class distribution checks
-- The dataset is excluded from this repository using `.gitignore` due to size constraints
+### Stage-2 Dataset (Multi-Class Classification)
+**Objective:** Identify cancer type
+
+**Classes:**
+1. Breast Cancer  
+2. Kidney Cancer  
+3. Lung Cancer  
+4. Oral Cancer  
+
+**Task:** Multi-class image classification
+
+---
+
+### Dataset Structure
+
+dataset/
+├── stage1/
+│   ├── normal/
+│   └── cancer/
+│
+└── stage2/
+├── breast/
+├── kidney/
+├── lung/
+└── oral/
+
+
+---
+
+## 🖼️ Image Preprocessing
+
+- Resize images to **224 × 224**
+- Convert to RGB
+- Normalize pixel values (0–1)
+- ImageNet-compatible normalization (for Swin models)
+
+---
+
+## 🧰 Tech Stack
+
+### Machine Learning
+- PyTorch (Swin Transformer)
+- TensorFlow / Keras
+- NumPy
+
+### Frontend & Deployment
+- Streamlit (Interactive UI)
+- Python 3.10+
+
+### Database
+- MySQL (Prediction logging)
+
+---
+
+## 🖥️ Application Features
+
+- Two-stage AI inference pipeline
+- Interactive Streamlit interface
+- Confidence-based predictions
+- Class probability visualization (bar chart)
+- Prediction logging to database
+- Separate Torch & Keras inference apps
+
+---
+
+## 📁 Project Structure
+
+multiclass-cancer-classification/
+├── models/
+│   ├── swin_cancer_stage1.pth
+│   ├── swin_cancer_stage2.pth
+│   ├── cancer_stage1_model.keras
+│   └── multi_cancer_stage2_model.keras
+│
+├── torch.py          # PyTorch inference app
+├── keras_app.py      # Keras inference app
+├── db.py             # Database utilities
+├── requirements.txt
+└── README.md
+
+
+---
+
+## ▶️ How to Run
+
+### 🔹 PyTorch Version
+
+streamlit run torch.py
+
+### 🔹 Keras Version
+
+streamlit run keras_app.py
