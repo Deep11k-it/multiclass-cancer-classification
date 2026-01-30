@@ -65,10 +65,10 @@ dataset/
 │   └── cancer/
 │
 └── stage2/
-├── breast/
-├── kidney/
-├── lung/
-└── oral/
+    ├── breast/
+    ├── kidney/
+    ├── lung/
+    └── oral/
 
 
 ---
