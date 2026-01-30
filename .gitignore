@@ -6,8 +6,10 @@ dataset/
 *.csv
 *.h5
 *.keras
+*.pth
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 mccp_venv
 .env
+test.py
