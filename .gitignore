@@ -1,15 +1,28 @@
-# Ignore dataset folder
-dataset/
 
-# Ignore large data & temp files
+# Data & Datasets
+dataset/
 *.zip
 *.csv
+
+
+# Trained Models (DO NOT COMMIT)
+models/
 *.h5
 *.keras
 *.pth
+
+# Python Artifacts
 __pycache__/
+*.pyc
 .ipynb_checkpoints/
-.DS_Store
-mccp_venv
+
+# Environment & Secrets
 .env
+mccp_venv/
+venv/
+
+# OS / Editor Files
+.DS_Store
+
+# Temporary / Test Files
 test.py
