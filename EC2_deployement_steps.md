@@ -45,12 +45,6 @@ To ensure **stability and zero OOM crashes**, only the **Stage-1 cancer screenin
 ```bash
 sudo apt update
 sudo apt install -y python3-pip python3-venv git
-
+```
 STEP 2: Clone Repository (ON EC2)
-cd ~
-git clone https://github.com/<your-username>/multiclass-cancer-classification.git
-cd multiclass-cancer-classification
 
-python3 -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
