@@ -26,3 +26,5 @@ venv/
 
 # Temporary / Test Files
 test.py
+
+intelliscan.pem
