@@ -42,9 +42,40 @@ To ensure **stability and zero OOM crashes**, only the **Stage-1 cancer screenin
 ## 🛠️ EC2 Setup & Deployment Steps
 
 ### Step 1 – System Setup (EC2)
-```bash
+```
 sudo apt update
 sudo apt install -y python3-pip python3-venv git
 ```
-STEP 2: Clone Repository (ON EC2)
+## STEP 2: Clone Repository (ON EC2)
+```
+cd ~
+git clone https://github.com/<your-username>/multiclass-cancer-classification.git
+cd multiclass-cancer-classification
+```
+## STEP 3: Create Virtual Environment (ON EC2)
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+```
+## STEP 4: Install Dependencies (ON EC2 – CPU ONLY)
+```
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+pip install streamlit pillow numpy
+```
+## STEP 5: Create Models Directory (ON EC2)
+```
+mkdir -p models
+```
+## STEP 6: Copy Torch Model Files (ON LOCAL MACHINE)
+```
+scp -i intelliscan.pem models/*.pth \
+ubuntu@<EC2_PUBLIC_IP>:/home/ubuntu/multiclass-cancer-classification/models/
+```
+## STEP 7: Run Application (ON EC2)
+
+```
+streamlit run stage1_app.py --server.port 8501 --server.address 0.0.0.0
+```
+
 
