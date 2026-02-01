@@ -1,15 +1,19 @@
 import pandas as pd
 import mysql.connector
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
-# =====================================
-# Database Configuration
-# =====================================
+load_dotenv()
+
+# ======================================================
+# MySQL Configuration
+# ======================================================
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "MYsql123",          # <-- change this
-    "database": "cancer_predictions"
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "database": os.getenv("DB_NAME")
 }
 
 # =====================================
