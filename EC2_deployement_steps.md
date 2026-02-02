@@ -48,8 +48,7 @@ sudo apt install -y python3-pip python3-venv git
 ```
 ## STEP 2: Clone Repository (ON EC2)
 ```
-cd ~
-git clone https://github.com/<your-username>/multiclass-cancer-classification.git
+git clone https://github.com/Deep11k-it/multiclass-cancer-classification.git
 cd multiclass-cancer-classification
 ```
 ## STEP 3: Create Virtual Environment (ON EC2)
