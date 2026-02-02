@@ -74,7 +74,7 @@ ubuntu@<EC2_PUBLIC_IP>:/home/ubuntu/multiclass-cancer-classification/models/
 ## STEP 7: Run Application (ON EC2)
 
 ```
-streamlit run stage1_app.py --server.port 8501 --server.address 0.0.0.0
+streamlit run <appname>
 ```
 
 
