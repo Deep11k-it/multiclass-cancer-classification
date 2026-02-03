@@ -1,11 +1,11 @@
-# 🧬 IntelliScan: AI-Assisted Cancer Screening System
+# IntelliScan: AI-Assisted Cancer Screening System
 
 IntelliScan is a **two-stage deep learning–based medical image screening system** designed for **academic and research purposes**.  
 The system performs **cancer presence detection** followed by **cancer type classification**, mimicking a real-world clinical screening workflow.
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 Traditional single-step cancer classification models often suffer from unnecessary complexity and false positives.  
 IntelliScan addresses this by adopting a **two-stage pipeline**:
@@ -17,7 +17,7 @@ This modular approach improves **interpretability**, **efficiency**, and **deplo
 
 ---
 
-## 🧠 Methodology (Two-Stage Pipeline)
+##  Methodology (Two-Stage Pipeline)
 
 ### 🔹 Stage 1 – Cancer Presence Screening
 - Binary classification: `Normal` vs `Cancer`
@@ -164,7 +164,7 @@ They are **not suitable for real medical diagnosis or clinical use**.
 
 ---
 
-## 🖥️ Application Features
+## Application Features
 
 - Two-stage AI inference pipeline
 - Interactive Streamlit interface
