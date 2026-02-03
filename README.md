@@ -75,7 +75,7 @@ This stage is executed **only when Stage 1 predicts cancer**.
 ---
 
 ## Dataset Structure
-
+```
 dataset/
 ├── stage1/
 │   ├── train/
@@ -96,6 +96,8 @@ dataset/
 │       ├── kidney/
 │       ├── lung/
 │       └── oral/
+
+```
 Each folder contains medical images belonging to that class.
 
 ---
@@ -202,3 +204,6 @@ streamlit run torch.py
 ### 🔹 Keras Version
 
 streamlit run keras_app.py
+
+
+
