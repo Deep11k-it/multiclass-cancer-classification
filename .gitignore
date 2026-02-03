@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+# Ignore dataset folder
+dataset/
+>>>>>>> ffa4d99 (2nd change)
 
 # Data & Datasets
 dataset/
@@ -23,8 +29,34 @@ venv/
 
 # OS / Editor Files
 .DS_Store
+<<<<<<< HEAD
 
 # Temporary / Test Files
 test.py
 
 intelliscan.pem
+=======
+mccp_venv
+.env
+=======
+# macOS system files
+.DS_Store
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Large ML model
+binary_cancer_model.keras
+
+# Images
+brain_menin_0003.jpg
+hhh.png
+kkkk.png
+lkl.png
+
+# Metadata / dataset folders
+final_metadata/
+Multi Cancer/
+
+>>>>>>> 4af2c07 (1 commit all wroking fine)
+>>>>>>> ffa4d99 (2nd change)
