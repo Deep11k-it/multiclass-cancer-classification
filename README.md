@@ -34,6 +34,11 @@ This modular approach improves **interpretability**, **efficiency**, and **deplo
 - Provides class probabilities and confidence score
 
 ---
+**Trained Model Link:**  
+
+###  Stage 1 – https://drive.google.com/file/d/1dJftQV07qX3qlxfY-EpjOAYJsIsXJ6P7/view?usp=drive_link
+###  Stage 2 – https://drive.google.com/file/d/1tKP2LyxF18k1GRzPm08pEGfmIoNh2r_g/view?usp=drive_link
+---
 
 # Dataset Summary
 
