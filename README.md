@@ -31,58 +31,124 @@ This modular approach improves **interpretability**, **efficiency**, and **deplo
 
 ---
 
-## Dataset Summary
+# Dataset Summary
 
-### Stage-1 Dataset (Binary Classification)
-**Objective:** Detect cancer presence
+In this project, we used publicly available **medical image datasets from Kaggle** to build a **two-stage cancer prediction system**.  
+The datasets are used only for **academic and learning purposes**.
+
+The idea behind using two datasets is to first **detect whether cancer is present** and then **identify the cancer type only if cancer is detected**.
+
+---
+
+## Datasets Used
+
+### 1. Cancer Prediction – Stage 1  
+**Kaggle Link:**  
+https://www.kaggle.com/datasets/yuvrajkari7/cancer-prediction-stage1
+
+**Purpose:**  
+This dataset is used for **Stage 1 screening**, where the model predicts whether an image indicates **cancer or not**.
 
 **Classes:**
 - Normal (Benign)
 - Cancer (Malignant)
 
-**Task:** Binary image classification
+This stage acts as a **filter**, so that only cancer-positive images are passed to the next stage.
 
 ---
 
-### Stage-2 Dataset (Multi-Class Classification)
-**Objective:** Identify cancer type
+### 2. Multi-Cancer Prediction – Stage 2  
+**Kaggle Link:**  
+https://www.kaggle.com/datasets/yuvrajkari7/multi-cancer-prediction-stage-2
+
+**Purpose:**  
+This dataset is used for **Stage 2 classification**, where the model predicts the **type of cancer**.
 
 **Classes:**
-1. Breast Cancer  
-2. Kidney Cancer  
-3. Lung Cancer  
-4. Oral Cancer  
+- Breast Cancer  
+- Kidney Cancer  
+- Lung Cancer  
+- Oral Cancer  
 
-**Task:** Multi-class image classification
+This stage is executed **only when Stage 1 predicts cancer**.
 
 ---
 
-### Dataset Structure
+## Dataset Structure
 
 dataset/
 ├── stage1/
-│   ├── normal/
-│   └── cancer/
+│   ├── train/
+│   │   ├── normal/
+│   │   └── cancer/
+│   └── test/
+│       ├── normal/
+│       └── cancer/
 │
-└── stage2/
-    ├── breast/
-    ├── kidney/
-    ├── lung/
-    └── oral/
-
-
----
-
-## Image Preprocessing
-
-- Resize images to **224 × 224**
-- Convert to RGB
-- Normalize pixel values (0–1)
-- ImageNet-compatible normalization (for Swin models)
+├── stage2/
+│   ├── train/
+│   │   ├── breast/
+│   │   ├── kidney/
+│   │   ├── lung/
+│   │   └── oral/
+│   └── test/
+│       ├── breast/
+│       ├── kidney/
+│       ├── lung/
+│       └── oral/
+Each folder contains medical images belonging to that class.
 
 ---
 
-## Tech Stack
+## Image Details
+
+- Image format: RGB images  
+- Image size: Varies across dataset  
+- Images are resized to a fixed size during preprocessing  
+- Datasets may contain class imbalance, which is common in medical data
+
+---
+
+## Preprocessing Performed
+
+Before training the models, the following steps were applied:
+
+- Image resizing (e.g., 224×224)
+- Pixel normalization
+- Removal of corrupted images
+- Data augmentation:
+  - Rotation
+  - Horizontal flip
+  - Zoom
+
+Only **safe augmentations** were used to avoid altering important medical patterns.
+
+---
+
+## Evaluation Considerations
+
+Since this is a **medical screening problem**:
+- **Recall** is treated as an important metric
+- Reducing false negatives is prioritized
+- Accuracy alone is not considered sufficient
+
+---
+
+## Disclaimer
+
+This dataset and the trained models are intended **only for academic and educational purposes**.  
+They are **not suitable for real medical diagnosis or clinical use**.
+
+---
+
+## Summary
+
+- Two Kaggle medical image datasets were used
+- Stage 1 performs cancer screening
+- Stage 2 performs cancer type classification
+- The dataset design supports a realistic medical workflow
+
+## 🧰 Tech Stack
 
 ### Machine Learning
 - PyTorch (Swin Transformer)
