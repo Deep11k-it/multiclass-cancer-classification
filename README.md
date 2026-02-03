@@ -34,7 +34,7 @@ This modular approach improves **interpretability**, **efficiency**, and **deplo
 - Provides class probabilities and confidence score
 
 ---
-### Trained Model Link:**  
+### Trained Model Link:
 
 **Stage 1:**
 https://drive.google.com/file/d/1dJftQV07qX3qlxfY-EpjOAYJsIsXJ6P7/view?usp=drive_link
