@@ -179,18 +179,41 @@ They are **not suitable for real medical diagnosis or clinical use**.
 
 ## 📁 Project Structure
 
+```
 multiclass-cancer-classification/
-├── models/
-│   ├── swin_cancer_stage1.pth
-│   ├── swin_cancer_stage2.pth
-│   ├── cancer_stage1_model.keras
-│   └── multi_cancer_stage2_model.keras
+├── __pycache__/                 # Python cache files
+├── mccp_venv/                   # Virtual environment (local)
 │
-├── torch.py          # PyTorch inference app
-├── keras_app.py      # Keras inference app
-├── db.py             # Database utilities
-├── requirements.txt
-└── README.md
+├── models/                      # Trained models
+│   ├── cancer_stage1_model.keras
+│   ├── multi_cancer_stage2_model.keras
+│   ├── swin_cancer_stage1.pth
+│   └── swin_cancer_stage2.pth
+│
+├── scripts/                     # Model training notebooks
+│   ├── stage1.ipynb             # Stage 1 training (cancer screening)
+│   └── stage2.ipynb             # Stage 2 training (cancer type classification)
+│
+├── .env                         # Environment variables (ignored in git)
+├── .gitignore                   # Git ignore rules
+│
+├── cancer_predictions.xlsx      # Exported prediction results
+├── db.py                        # Database connection and logging logic
+│
+├── EC2_deployment_steps.md      # AWS EC2 deployment instructions
+├── EC2_stage1_torch.py          # Stage 1 inference (PyTorch)
+├── EC2_torch_app.py             # Streamlit app (PyTorch)
+│
+├── export_predictions.py        # Export predictions from DB to file
+├── intelliscan.pem              # EC2 key file (should NOT be committed)
+│
+├── keras_app.py                 # Streamlit app (TensorFlow / Keras)
+├── torch_app.py                 # Streamlit app (PyTorch – local)
+│
+├── test.py                      # Testing / experimentation script
+├── Requirements.txt             # Python dependencies
+└── README.md                    # Project documentation
+```
 
 
 ---
