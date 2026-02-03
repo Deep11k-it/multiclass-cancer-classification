@@ -4,6 +4,9 @@ IntelliScan is a **two-stage deep learning–based medical image screening syste
 The system performs **cancer presence detection** followed by **cancer type classification**, mimicking a real-world clinical screening workflow.
 
 ---
+**Presentation Link:**  
+https://www.canva.com/design/DAG_7ZOU4tM/0WaPoyyRuGOmtpWVfkwPCQ/view?utm_content=DAG_7ZOU4tM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h1f382a4ec7#18
+---
 
 ## Project Overview
 
