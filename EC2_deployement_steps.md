@@ -1,4 +1,4 @@
-# 🧬 IntelliScan – AI Cancer Screening (EC2 Free Tier)
+# IntelliScan – AI Cancer Screening (EC2 Free Tier)
 
 IntelliScan is a **single-stage, PyTorch-based AI cancer screening system** deployed on **AWS EC2 Free Tier**.  
 The application performs **binary cancer presence detection (Normal vs Cancer)** using a **CPU-optimized Torch model** and an interactive **Streamlit UI**.
@@ -7,7 +7,7 @@ This deployment is **inference-only** and optimized for **low-memory environment
 
 ---
 
-## 🚀 Deployment Overview
+## Deployment Overview
 
 - **Cloud**: AWS EC2 (Free Tier)
 - **Instance Type**: t2.micro (1 GB RAM)
@@ -19,7 +19,7 @@ This deployment is **inference-only** and optimized for **low-memory environment
 
 ---
 
-## 📌 Why Single-Stage on Free Tier?
+##  Why Single-Stage on Free Tier?
 
 EC2 Free Tier has limited memory (1 GB RAM).  
 To ensure **stability and zero OOM crashes**, only the **Stage-1 cancer screening model** is deployed.
@@ -28,7 +28,7 @@ To ensure **stability and zero OOM crashes**, only the **Stage-1 cancer screenin
 
 ---
 
-## 🔧 Prerequisites
+##  Prerequisites
 
 - Ubuntu 22.04 EC2 instance (running)
 - Security Group inbound rules:
@@ -39,7 +39,7 @@ To ensure **stability and zero OOM crashes**, only the **Stage-1 cancer screenin
 
 ---
 
-## 🛠️ EC2 Setup & Deployment Steps
+##  EC2 Setup & Deployment Steps
 
 ### Step 1 – System Setup (EC2)
 ```
